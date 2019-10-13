@@ -11,6 +11,6 @@ public class Service {
 
     private String name;
 
-    @ManyToMany(mappedBy = "services")
+    @OneToMany(mappedBy = "services")
     private Set<Event> events;
 }

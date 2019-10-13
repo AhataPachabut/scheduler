@@ -5,6 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Resource {
 
     @Id
@@ -15,4 +16,28 @@ public class Resource {
 
     @ManyToMany(mappedBy = "resources")
     private Set<Event> events;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
 }

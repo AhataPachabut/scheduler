@@ -3,10 +3,8 @@ package com.it.model;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Resource {
+@MappedSuperclass
+public abstract class Resource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,7 @@ public class Resource {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -35,9 +34,4 @@ public class Resource {
     public Set<Event> getEvents() {
         return events;
     }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
-    }
-
 }

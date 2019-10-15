@@ -1,12 +1,8 @@
 package com.it;
 
 import com.it.dao.*;
-import com.it.model.*;
 import com.it.util.HibernateUtil;
 import org.hibernate.Session;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Hello world!
@@ -26,7 +22,7 @@ public class App
             System.out.println(session.toString());
         }
 
-        Client c = new Client();
+        /*Client c = new Client();
         c.setName("Client 1");
         clientDAO.save(c);
 
@@ -50,7 +46,7 @@ public class App
         event.setClient(c);
         event.setService(s);
         event.setResources(resources);
-        eventDAO.save(event);
+        eventDAO.save(event);*/
 
     }
 }

@@ -12,6 +12,10 @@ public abstract class Resource {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "resource_type_id")
+    private ResourceType resourceType;
+
     @ManyToMany(mappedBy = "resources")
     private Set<Event> events;
 
@@ -29,6 +33,14 @@ public abstract class Resource {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 
     public Set<Event> getEvents() {

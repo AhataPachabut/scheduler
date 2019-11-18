@@ -1,8 +1,7 @@
 package com.it;
 
 import com.it.dao.*;
-import com.it.util.HibernateUtil;
-import org.hibernate.Session;
+import com.it.model.Client;
 
 /**
  * Hello world!
@@ -18,15 +17,11 @@ public class App
 
     public static void main( String[] args )
     {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            System.out.println(session.toString());
-        }
-
-        /*Client c = new Client();
+        Client c = new Client();
         c.setName("Client 1");
         clientDAO.save(c);
 
-        Service s = new Service();
+        /*Service s = new Service();
         s.setName("Service 1");
         serviceDAO.save(s);
 

@@ -21,8 +21,8 @@ public class Event {
 
     @ManyToMany
     @JoinTable(name = "Event_Resource",
-            joinColumns = {@JoinColumn(name = "resource_id")},
-            inverseJoinColumns = {@JoinColumn(name = "event_id")})
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "resource_id")})
     private Set<Resource> resources;
 
     public Long getId() {

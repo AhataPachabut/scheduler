@@ -1,11 +1,12 @@
 package com.it.model;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
-@Entity
-@Table
-public class Client {
+public class ResourceType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +14,8 @@ public class Client {
 
     private String name;
 
-    @OneToMany(mappedBy = "client")
-    private Set<Event> events;
+    @OneToMany(mappedBy = "resource_type")
+    private Set<Resource> resources;
 
     public Long getId() {
         return id;
@@ -32,7 +33,7 @@ public class Client {
         this.name = name;
     }
 
-    public Set<Event> getEvents() {
-        return events;
+    public Set<Resource> getResources() {
+        return resources;
     }
 }

@@ -70,7 +70,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>com.it.App</mainClass>
+                <mainClass>com.it.Main</mainClass>
               </manifest>
             </archive>
           </configuration>

@@ -1,6 +1,5 @@
 package com.it.dao;
 
-import com.it.dao.GenericDAO;
 import com.it.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

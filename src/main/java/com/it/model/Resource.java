@@ -3,7 +3,10 @@ package com.it.model;
 import javax.persistence.*;
 import java.util.Set;
 
-@MappedSuperclass
+@Entity
+@Table
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Resource {
 
     @Id
@@ -11,10 +14,6 @@ public abstract class Resource {
     private Long id;
 
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "resource_type_id")
-    private ResourceType resourceType;
 
     @ManyToMany(mappedBy = "resources")
     private Set<Event> events;
@@ -35,15 +34,4 @@ public abstract class Resource {
         this.name = name;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(ResourceType resourceType) {
-        this.resourceType = resourceType;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
 }

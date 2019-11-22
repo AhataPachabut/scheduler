@@ -3,6 +3,8 @@ package com.it.model;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table
 public class Service {
 
     @Id
@@ -11,7 +13,7 @@ public class Service {
 
     private String name;
 
-    @OneToMany(mappedBy = "services")
+    @OneToMany(mappedBy = "service")
     private Set<Event> events;
 
     public Long getId() {

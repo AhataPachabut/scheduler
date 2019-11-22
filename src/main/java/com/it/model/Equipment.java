@@ -3,6 +3,6 @@ package com.it.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@DiscriminatorValue("equipment")
 public class Equipment extends Resource {
 }

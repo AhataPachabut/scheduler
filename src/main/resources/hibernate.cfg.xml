@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/mydb</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/mybase</property>
         <property name="hibernate.connection.username">admin</property>
         <property name="hibernate.connection.password">admin</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -15,7 +15,7 @@
         <mapping class="com.it.model.Event"></mapping>
         <mapping class="com.it.model.Client"></mapping>
         <mapping class="com.it.model.Service"></mapping>
-        <mapping class="com.it.model.Resource"></mapping>
+<!--        <mapping class="com.it.model.Resource"></mapping>-->
         <mapping class="com.it.model.Equipment"></mapping>
         <mapping class="com.it.model.Employee"></mapping>
     </session-factory>

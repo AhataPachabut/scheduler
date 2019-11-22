@@ -2,12 +2,13 @@ package com.it;
 
 import com.it.dao.*;
 import com.it.model.Client;
+import com.it.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
-/**
- * Hello world!
- *
- */
-public class App 
+@Component
+public class App
 {
     private static final EventDAO eventDAO = EventDAOImpl.getInstance();
     private static final ClientDAO clientDAO = ClientDAOImpl.getInstance();
@@ -15,8 +16,14 @@ public class App
     private static final EmployeeDAO employeeDAO = EmployeeDAOImpl.getInstance();
     private static final EquipmentDAO equipmentDAO = EquipmentDAOImpl.getInstance();
 
+    @Autowired
+    private ClientRepository clientRepository;
+
     public static void main( String[] args )
     {
+        AnnotationConfigApplicationContext annotatedClassApplicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        System.out.println(annotatedClassApplicationContext.getBeanDefinitionNames().toString());
+
         Client c = new Client();
         c.setName("Client 1");
         clientDAO.save(c);

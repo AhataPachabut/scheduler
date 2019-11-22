@@ -49,11 +49,11 @@ public class Event {
         this.client = client;
     }
 
-    public Set<Resource> getResources() {
+    /*public Set<Resource> getResources() {
         return resources;
     }
 
     public void setResources(Set<Resource> resources) {
         this.resources = resources;
-    }
+    }*/
 }

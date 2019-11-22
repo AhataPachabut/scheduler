@@ -6,16 +6,18 @@
   <groupId>com.it</groupId>
   <artifactId>myapp</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+<!--  <packaging>jar</packaging>-->
+  <packaging>war</packaging>
   <name>myapp</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <jdk.version>1.7</jdk.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <jdk.version>1.8</jdk.version>
     <org.spring.core>5.1.5.RELEASE</org.spring.core>
     <org.spring.data>2.1.8.RELEASE</org.spring.data>
+    <hibernate.entitymanager>5.4.2.Final</hibernate.entitymanager>
   </properties>
 
   <dependencies>
@@ -47,7 +49,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>5.4.2.Final</version>
+      <version>${hibernate.entitymanager}</version>
     </dependency>
   </dependencies>
 
@@ -71,6 +73,14 @@
                 <mainClass>com.it.App</mainClass>
               </manifest>
             </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.6</version>
+          <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
           </configuration>
         </plugin>
       </plugins>

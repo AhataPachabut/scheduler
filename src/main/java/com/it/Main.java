@@ -32,7 +32,7 @@ public class Main {
     private EventRepository eventRepository;
 
     public static void main(String[] args) {
-       // testHibernate();
+        //testHibernate();
         testSpringData();
     }
 
@@ -76,7 +76,6 @@ public class Main {
     public static void testSpringData(){
 
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        //System.out.println(annotatedClassApplicationContext.getBeanDefinitionNames().toString());
 
         Main main = appContext.getBean(Main.class);
 

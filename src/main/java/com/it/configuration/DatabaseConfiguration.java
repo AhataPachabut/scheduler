@@ -1,9 +1,7 @@
-package com.it;
+package com.it.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,14 +17,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
 @PropertySource("classpath:database.properties")
-@ComponentScan("com.it")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {
         "com.it.repository"
 })
-public class AppConfig {
+public class DatabaseConfiguration {
 
     @Autowired
     private Environment env;
@@ -61,8 +57,9 @@ public class AppConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
         return properties;
     }
+
 }

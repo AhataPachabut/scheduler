@@ -1,5 +1,6 @@
 package com.it;
 
+import com.it.configuration.AppConfiguration;
 import com.it.dao.*;
 import com.it.model.*;
 import com.it.repository.ClientRepository;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Component
 public class Main {
+
     private static final ClientDAO clientDAO = ClientDAOImpl.getInstance();
     private static final ServiceDAO serviceDAO = ServiceDAOImpl.getInstance();
     private static final ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
@@ -75,9 +77,9 @@ public class Main {
 
     public static void testSpringData(){
 
-        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
 
-        Main main = appContext.getBean(Main.class);
+        Main main = applicationContext.getBean(Main.class);
 
         //transcient
         Client c = new Client();
@@ -102,12 +104,12 @@ public class Main {
         equipment = main.resourceRepository.getOne(equipment.getId());
 
         Event event = new Event();
-        //event.setClient(c);
+        event.setClient(c);
         event.setService(s);
         Set<Resource> resources = new HashSet<Resource>();
         resources.add(employee);
         resources.add(equipment);
-        event.setResources(resources);
+       event.setResources(resources);
         main.eventRepository.save(event);
     }
 }

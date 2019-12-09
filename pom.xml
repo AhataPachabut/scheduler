@@ -19,23 +19,30 @@
     <hibernate.core>5.4.2.Final</hibernate.core>
     <org.spring.core>5.1.5.RELEASE</org.spring.core>
     <org.spring.data>2.1.8.RELEASE</org.spring.data>
-    <hibernate.validator>6.0.16.Final</hibernate.validator>
     <javax.servlet>4.0.1</javax.servlet>
-    <thymeleaf>3.0.9.RELEASE</thymeleaf>
-
+    <jackson.core>2.9.9</jackson.core>
+    <dozer>5.5.1</dozer>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>${org.postgresql}</version>
-    </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>${hibernate.core}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>3.0.9.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.0.9.RELEASE</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
@@ -62,25 +69,30 @@
       <version>${hibernate.core}</version>
     </dependency>
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${org.postgresql}</version>
+    </dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>${javax.servlet}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>${hibernate.validator}</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.core}</version>
     </dependency>
     <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>${thymeleaf}</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.core}</version>
     </dependency>
     <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
-      <version>${thymeleaf}</version>
+      <groupId>net.sf.dozer</groupId>
+      <artifactId>dozer</artifactId>
+      <version>${dozer}</version>
     </dependency>
   </dependencies>
 

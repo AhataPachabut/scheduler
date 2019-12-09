@@ -1,6 +1,5 @@
-package com.it;
+package com.it.configuration;
 
-import com.it.configuration.AppConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 //like main

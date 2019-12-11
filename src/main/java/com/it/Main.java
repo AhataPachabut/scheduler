@@ -7,8 +7,6 @@ import com.it.repository.ClientRepository;
 import com.it.repository.EventRepository;
 import com.it.repository.ResourceRepository;
 import com.it.repository.ServiceRepository;
-import com.it.util.HibernateUtil;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -39,9 +37,6 @@ public class Main {
     }
 
     public static void testHibernate() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            System.out.println(session.toString());
-        }
 
         //transcient
         Client c = new Client();

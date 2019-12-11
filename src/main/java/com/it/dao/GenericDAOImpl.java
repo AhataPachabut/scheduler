@@ -1,12 +1,41 @@
 package com.it.dao;
 
-import com.it.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.Serializable;
 
 public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
+
+    private static StandardServiceRegistry registry;
+    private static SessionFactory sessionFactory;
+
+    public static synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                // Create registry
+                registry = new StandardServiceRegistryBuilder().configure().build();
+                // Create MetadataSources
+                MetadataSources sources = new MetadataSources(registry);
+                // Create Metadata
+                Metadata metadata = sources.getMetadataBuilder().build();
+                // Create SessionFactory
+                sessionFactory = metadata.getSessionFactoryBuilder().build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (registry != null) {
+                    StandardServiceRegistryBuilder.destroy(registry);
+                }
+            }
+        }
+        return sessionFactory;
+    }
+
     private final Class<T> type;
 
     GenericDAOImpl(Class<T> type) {
@@ -19,7 +48,7 @@ public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
      * @param id - entity ID
      */
     public T getOne(U id) {
-        try (Session session = com.it.util.HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = getSessionFactory().openSession()) {
             return session.get(type, (Serializable) id);
         }
     }
@@ -31,7 +60,7 @@ public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
      */
     public void delete(U id) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             T entity = session.get(type, (Serializable) id);
             if (entity != null) {
@@ -52,7 +81,7 @@ public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
      */
     public void save(T entity) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
@@ -70,7 +99,7 @@ public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
      */
     public void update(T entity) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.update(entity);
             transaction.commit();

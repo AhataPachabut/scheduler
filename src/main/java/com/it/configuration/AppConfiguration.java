@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan("com.it")
+@ComponentScan(basePackages = "com.it")
 @Import({WebConfiguration.class, DatabaseConfiguration.class})
 public class AppConfiguration {
 

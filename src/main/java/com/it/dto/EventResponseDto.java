@@ -4,33 +4,43 @@ import java.util.Set;
 
 public class EventResponseDto {
 
-    private String clientName;
+    private Long id;
 
-    private String serviceName;
+    private Long clientId;
 
-    private Set<String> resourcesName;
+    private Long serviceId;
 
-    public String getClientName() {
-        return clientName;
+    private Set<Long> resourcesId;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
-    public Set<String> getResourcesName() {
-        return resourcesName;
+    public Long getServiceId() {
+        return serviceId;
     }
 
-    public void setResourcesName(Set<String> resourcesName) {
-        this.resourcesName = resourcesName;
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public Set<Long> getResourcesId() {
+        return resourcesId;
+    }
+
+    public void setResourcesId(Set<Long> resourcesId) {
+        this.resourcesId = resourcesId;
     }
 }

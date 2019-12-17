@@ -10,6 +10,7 @@ com\it\dao\ClientDAOImpl.class
 com\it\dto\EventRequestDto.class
 com\it\dao\ResourceDAOImpl.class
 com\it\dto\EventResponseDto.class
+com\it\controller\ControllerMVC.class
 com\it\model\Resource.class
 com\it\configuration\DatabaseConfiguration.class
 com\it\model\Client.class
@@ -17,6 +18,7 @@ com\it\dto\ErrorResponseDto.class
 com\it\dao\EventDAO.class
 com\it\dao\EventDAOImpl.class
 com\it\configuration\DispatcherServletInitializer.class
+com\it\configuration\WebConfigurationMVC.class
 com\it\Main.class
 com\it\dao\ClientDAO.class
 com\it\dao\GenericDAO.class
@@ -25,7 +27,6 @@ com\it\model\Employee.class
 com\it\repository\ServiceRepository.class
 com\it\dao\GenericDAOImpl.class
 com\it\dao\ServiceDAOImpl.class
-com\it\controller\StartupController.class
 com\it\controller\EventController.class
 com\it\repository\ResourceRepository.class
 com\it\model\Event.class

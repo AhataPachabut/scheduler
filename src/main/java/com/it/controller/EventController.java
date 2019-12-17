@@ -54,10 +54,7 @@ public class EventController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<EventResponseDto> read(@PathVariable Long id) {
-        final Event event = eventRepository.getOne(id);
-        if (!id.equals(event.getId())) {
-            throw new RuntimeException();
-        }
+        Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException());
 
         final EventResponseDto responseDto = mapper.map(event, EventResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -65,9 +62,7 @@ public class EventController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventResponseDto> update(@PathVariable Long id, @RequestBody EventRequestDto requestDto) {
-        if (!id.equals(eventRepository.getOne(id).getId())) {
-            throw new RuntimeException();
-        }
+        eventRepository.findById(id).orElseThrow(() -> new RuntimeException());
 
         final Event event = mapper.map(requestDto, Event.class);
         event.setId(id);
@@ -81,9 +76,7 @@ public class EventController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
-        if (!id.equals(eventRepository.getOne(id).getId())) {
-            throw new RuntimeException();
-        }
+        eventRepository.findById(id).orElseThrow(() -> new RuntimeException());
 
         eventRepository.deleteById(id);
     }

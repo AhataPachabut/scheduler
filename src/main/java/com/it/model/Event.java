@@ -13,12 +13,12 @@ public class Event implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
-
-    @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
+    private Service service;
 
     @ManyToMany
     @JoinTable(name = "Event_Resource",

@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan(basePackages = "com.it")
-@Import({WebConfiguration.class, DatabaseConfiguration.class})
+@Import({WebConfiguration.class, DatabaseConfiguration.class, SecurityConfiguration.class})
+//@Import({WebConfiguration.class, DatabaseConfiguration.class})
 public class AppConfiguration {
 
 }

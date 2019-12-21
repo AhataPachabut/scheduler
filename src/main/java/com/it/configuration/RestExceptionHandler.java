@@ -1,6 +1,6 @@
 package com.it.configuration;
 
-import com.it.dto.ErrorResponseDto;
+import com.it.dto.response.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 //catch exceptions from all @RestController
 @ControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
+    //private static final Logger LOGGER = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, WebRequest request) {

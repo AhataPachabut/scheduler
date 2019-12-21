@@ -5,14 +5,15 @@ import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-//view resolver (сопоставляет методы контроллеров и views)
 @EnableWebMvc
 public class WebConfiguration {
 
     @Bean
     public Mapper mapper() {
-        final DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
-/*
+        return new DozerBeanMapper();
+
+        /*final DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
+
          class EventRequestDtoConverter extends DozerConverter<EventRequestDto, Event>
         {
 
@@ -41,7 +42,8 @@ public class WebConfiguration {
             }
         };
         dozerBeanMapper.addMapping(builder);
-*/
-        return dozerBeanMapper;
+
+        return dozerBeanMapper;*/
     }
+
 }

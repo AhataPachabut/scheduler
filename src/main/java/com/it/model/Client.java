@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "CLIENTS")
 public class Client implements Serializable {
 
     @Id
@@ -16,6 +16,9 @@ public class Client implements Serializable {
 
     @OneToMany(mappedBy = "client")
     private Set<Event> events;
+
+//    @OneToOne(mappedBy = "client")
+//    private User user;
 
     public Long getId() {
         return id;
@@ -36,4 +39,16 @@ public class Client implements Serializable {
     public Set<Event> getEvents() {
         return events;
     }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }

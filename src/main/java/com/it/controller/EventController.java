@@ -1,7 +1,7 @@
 package com.it.controller;
 
 import com.it.dto.request.EventRequestDto;
-import com.it.dto.responce.EventResponseDto;
+import com.it.dto.response.EventResponseDto;
 import com.it.model.Event;
 import com.it.repository.ClientRepository;
 import com.it.repository.EventRepository;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//crud
-//dto
-//mapper
-//db
-//exceptions
+//crud+
+//dto+
+//mapper+-
+//db+
+//exceptions+-
 //validate
 //logger
 //spring security
@@ -29,9 +29,6 @@ import java.util.stream.Collectors;
 public class EventController {
 
     @Autowired
-    private Mapper mapper;
-
-    @Autowired
     private EventRepository eventRepository;
 
     @Autowired
@@ -39,6 +36,9 @@ public class EventController {
 
     @Autowired
     private ServiceRepository serviceRepository;
+
+    @Autowired
+    private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<EventResponseDto>> readAll() {

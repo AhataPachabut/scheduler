@@ -5,6 +5,7 @@ import com.it.dto.response.EventResponseDto;
 import com.it.model.Event;
 import com.it.repository.ClientRepository;
 import com.it.repository.EventRepository;
+import com.it.repository.ResourceRepository;
 import com.it.repository.ServiceRepository;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +39,29 @@ public class EventController {
     private ServiceRepository serviceRepository;
 
     @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
     private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<EventResponseDto>> readAll() {
-        final List<Event> events = eventRepository.findAll();
+        final List<Event> event = eventRepository.findAll();
 
-        final List<EventResponseDto> responseDto = events.stream()
-                .map((user) -> mapper.map(user, EventResponseDto.class))
+        final List<EventResponseDto> responseDto = event.stream()
+                .map((i) -> mapper.map(i, EventResponseDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<EventResponseDto> create(@RequestBody EventRequestDto requestDto) {
-        Event event = new Event();
-        event.setClient(clientRepository.findById(requestDto.getClientId()).orElseThrow(() -> new RuntimeException()));
-        event.setService(serviceRepository.findById(requestDto.getServiceId()).orElseThrow(() -> new RuntimeException()));
+        final Event event = mapper.map(requestDto, Event.class);
+        event.setClient(clientRepository.findById(requestDto.getClient()).orElseThrow(() -> new RuntimeException()));
+        event.setService(serviceRepository.findById(requestDto.getService()).orElseThrow(() -> new RuntimeException()));
+        event.setResources(requestDto.getResources().stream()
+                .map((i) -> resourceRepository.findById(i).orElseThrow(() -> new RuntimeException()))
+                .collect(Collectors.toSet()));
         eventRepository.save(event);
 
         final EventResponseDto responseDto = mapper.map(event, EventResponseDto.class);
@@ -72,8 +79,11 @@ public class EventController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventResponseDto> update(@PathVariable Long id, @RequestBody EventRequestDto requestDto) {
         Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException());
-        event.setClient(clientRepository.findById(requestDto.getClientId()).orElseThrow(() -> new RuntimeException()));
-        event.setService(serviceRepository.findById(requestDto.getServiceId()).orElseThrow(() -> new RuntimeException()));
+        event.setClient(clientRepository.findById(requestDto.getClient()).orElseThrow(() -> new RuntimeException()));
+        event.setService(serviceRepository.findById(requestDto.getService()).orElseThrow(() -> new RuntimeException()));
+        event.setResources(requestDto.getResources().stream()
+                .map((i) -> resourceRepository.findById(i).orElseThrow(() -> new RuntimeException()))
+                .collect(Collectors.toSet()));
         eventRepository.save(event);
 
         final EventResponseDto responseDto = mapper.map(event, EventResponseDto.class);

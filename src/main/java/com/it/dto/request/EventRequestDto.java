@@ -4,33 +4,33 @@ import java.util.Set;
 
 public class EventRequestDto {
 
-    private Long clientId;
+    private Long client;
 
-    private Long serviceId;
+    private Long service;
 
-    private Set<Long> resourcesId;
+    private Set<Long> resources;
 
-    public Long getClientId() {
-        return clientId;
+    public Long getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Long client) {
+        this.client = client;
     }
 
-    public Long getServiceId() {
-        return serviceId;
+    public Long getService() {
+        return service;
     }
 
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+    public void setService(Long service) {
+        this.service = service;
     }
 
-    public Set<Long> getResourcesId() {
-        return resourcesId;
+    public Set<Long> getResources() {
+        return resources;
     }
 
-    public void setResourcesId(Set<Long> resourcesId) {
-        this.resourcesId = resourcesId;
+    public void setResources(Set<Long> resources) {
+        this.resources = resources;
     }
 }

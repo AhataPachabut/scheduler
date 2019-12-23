@@ -11,6 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+//UI - TokenFilter - LoginPassFilter - AuthController - /auth/register - return new user dto
+//UI + login + pass - TokenFilter - LoginPassFilter - AuthController - /auth/signin - (auth by LoginPass) - return new access+refresh token
+//UI + access token - TokenFilter - (auth by Token) - LoginPassFilter - Controller - return dto
+//UI + refresh token - TokenFilter - AuthController - /auth/refreshtoken - return new access+refresh token
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -31,9 +36,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                .antMatchers("/**").permitAll();
-//                .csrf().disable().cors()
+//                .authorizeRequests()
+//                .antMatchers("/**").permitAll();
+                .csrf().disable().cors()
 //                .and()
 //                .authorizeRequests()
 //                .mvcMatchers("/auth/**").permitAll()

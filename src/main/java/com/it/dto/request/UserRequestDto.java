@@ -1,5 +1,7 @@
 package com.it.dto.request;
 
+
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 public class UserRequestDto {
@@ -8,9 +10,10 @@ public class UserRequestDto {
 
     private String password;
 
-    private Set<String> roles;
+    @NotNull(message = "{user.roles.notNull}")
+    private Set<Long> roles;
 
-    private Long clientId;
+    private Long client;
 
     public String getName() {
         return name;
@@ -28,19 +31,17 @@ public class UserRequestDto {
         this.password = password;
     }
 
-    public Set<String> getRoles() {
+    public Set<Long> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<Long> roles) {
         this.roles = roles;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public Long getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
+    public void setClient(Long client) { this.client = client; }
 }

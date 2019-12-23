@@ -10,7 +10,7 @@ public class UserResponseDto {
 
     private String name;
 
-    private Set<String> roles;
+    private Set<RoleResponseDto> roles;
 
     private ClientRequestDto client;
 
@@ -30,11 +30,11 @@ public class UserResponseDto {
         this.name = name;
     }
 
-    public Set<String> getRoles() {
+    public Set<RoleResponseDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<RoleResponseDto> roles) {
         this.roles = roles;
     }
 

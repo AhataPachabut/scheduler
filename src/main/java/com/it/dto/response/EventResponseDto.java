@@ -10,7 +10,7 @@ public class EventResponseDto {
 
     private ServiceResponseDto service;
 
-    private Set<Long> resourcesId;
+    private Set<ResourceResponseDto> resources;
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class EventResponseDto {
         this.service = service;
     }
 
-    public Set<Long> getResourcesId() {
-        return resourcesId;
+    public Set<ResourceResponseDto> getResources() {
+        return resources;
     }
 
-    public void setResourcesId(Set<Long> resourcesId) {
-        this.resourcesId = resourcesId;
+    public void setResources(Set<ResourceResponseDto> resources) {
+        this.resources = resources;
     }
 }

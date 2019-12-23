@@ -24,6 +24,7 @@
     <dozer>5.5.1</dozer>
     <logback>1.2.3</logback>
     <jjwt>0.9.1</jjwt>
+    <hibernate.validator>6.0.16.Final</hibernate.validator>
   </properties>
 
   <dependencies>
@@ -103,6 +104,12 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate.validator}</version>
     </dependency>
 
     <dependency>

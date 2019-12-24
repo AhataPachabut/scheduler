@@ -1,12 +1,12 @@
 package com.it.security.service;
 
-import org.springframework.security.core.Authentication;
+import com.it.model.Token;
 
 public interface TokenService {
 
-    String generate(Authentication authentication);
+    Token generate(String username);
 
-    String refresh(String token);
+    Token refresh(String token);
 
     String extractUsername(String token);
 

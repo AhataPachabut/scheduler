@@ -1,7 +1,6 @@
 package com.it.controller;
 
 import com.it.dto.response.TokenResponseDTO;
-import com.it.model.Session;
 import com.it.security.service.TokenService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class AuthController {
     private TokenService tokenService;
 
     @Autowired
-    private Session userRepository;
-
-    @Autowired
     private Mapper mapper;
 
     @GetMapping("/signin")
@@ -40,17 +36,15 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        //return token
-        final TokenResponseDTO responseDto = new TokenResponseDTO();
-        responseDto.setAccessToken(tokenService.generate(authentication));
-        responseDto.setRefreshToken(tokenService.generate(authentication));
+        //generate token
+        final TokenResponseDTO responseDto = mapper.map(tokenService.generate(username), TokenResponseDTO.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @GetMapping("/refreshtoken")
     public ResponseEntity<TokenResponseDTO> refreshToken(@RequestParam String token) {
-        final TokenResponseDTO responseDto = new TokenResponseDTO();
-        responseDto.setAccessToken(tokenService.refresh(token));
+        //refresh token
+        final TokenResponseDTO responseDto = mapper.map(tokenService.refresh(token), TokenResponseDTO.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

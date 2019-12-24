@@ -1,6 +1,7 @@
 package com.it.dto.request;
 
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -8,9 +9,12 @@ public class UserRequestDto {
 
     private String name;
 
+    @NotNull(message = "{role.name.notNull}")
+    @NotEmpty(message = "{role.name.notEmpty}")
     private String password;
 
     @NotNull(message = "{user.roles.notNull}")
+    @NotEmpty(message = "{user.roles.notEmpty}")
     private Set<Long> roles;
 
     private Long client;

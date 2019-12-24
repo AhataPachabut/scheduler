@@ -1,12 +1,22 @@
-package com.it.dto.response;
+package com.it.model;
 
-public class TokenResponseDTO {
+public class Token {
+
+    private Long id;
 
     private String accessToken;
 
     private String refreshToken;
 
     private String tokenType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAccessToken() {
         return accessToken;

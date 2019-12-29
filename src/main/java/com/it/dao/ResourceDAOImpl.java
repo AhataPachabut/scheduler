@@ -1,7 +1,9 @@
 package com.it.dao;
 
 import com.it.model.Resource;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ResourceDAOImpl extends GenericDAOImpl<Resource, Long> implements ResourceDAO {
     private static ResourceDAOImpl instance;
 

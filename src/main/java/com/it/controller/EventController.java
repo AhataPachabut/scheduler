@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 //mapper+-
 //db+
 //exceptions+-
-//validate
+//validate+-
 //logger
-//spring security
+//spring security+-
 
 @RestController
 @RequestMapping("/events")

@@ -1,4 +1,4 @@
-package com.it.configuration;
+package com.it.webMVC.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

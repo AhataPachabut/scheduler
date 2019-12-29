@@ -7,17 +7,16 @@ import java.util.Set;
 
 public class UserRequestDto {
 
+    @NotNull(message = "{user.name.notNull}")
+    @NotEmpty(message = "{user.name.notEmpty}")
     private String name;
 
-    @NotNull(message = "{role.name.notNull}")
-    @NotEmpty(message = "{role.name.notEmpty}")
+    @NotNull(message = "{user.password.notNull}")
+    @NotEmpty(message = "{user.password.notEmpty}")
     private String password;
 
     @NotNull(message = "{user.roles.notNull}")
-    @NotEmpty(message = "{user.roles.notEmpty}")
     private Set<Long> roles;
-
-    private Long client;
 
     public String getName() {
         return name;
@@ -42,10 +41,4 @@ public class UserRequestDto {
     public void setRoles(Set<Long> roles) {
         this.roles = roles;
     }
-
-    public Long getClient() {
-        return client;
-    }
-
-    public void setClient(Long client) { this.client = client; }
 }

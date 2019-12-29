@@ -17,8 +17,9 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client")
     private Set<Event> events;
 
-//    @OneToOne(mappedBy = "client")
-//    private User user;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -44,11 +45,11 @@ public class Client implements Serializable {
         this.events = events;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

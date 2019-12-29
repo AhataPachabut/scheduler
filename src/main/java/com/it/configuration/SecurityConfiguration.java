@@ -1,7 +1,6 @@
 package com.it.configuration;
 
 import com.it.security.filter.TokenAuthenticationFilter;
-import com.it.security.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.token.TokenService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,16 +46,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-//                .authorizeRequests()
-//                .antMatchers("/**").permitAll();
-                .csrf().disable().cors()
-//                .and()
-//                .authorizeRequests()
-//                .mvcMatchers("/auth/**").permitAll()
-                //.mvcMatchers(HttpMethod.GET, "/roles/**", "/users/**").hasAnyRole("ADMIN", "USER")
-                //.anyRequest().hasRole("ADMIN")
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .cors()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
                 ;
 
-        http.addFilterBefore(new TokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new TokenAuthenticationFilter(tokenService, userDetailsService), UsernamePasswordAuthenticationFilter.class);
     }
 }

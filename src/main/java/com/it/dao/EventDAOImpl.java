@@ -1,7 +1,9 @@
 package com.it.dao;
 
 import com.it.model.Event;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class EventDAOImpl extends GenericDAOImpl<Event, Long> implements EventDAO {
     private static EventDAOImpl instance;
 

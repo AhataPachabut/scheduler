@@ -7,9 +7,11 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
+@Repository
 public abstract class GenericDAOImpl<T, U> implements GenericDAO<T, U> {
 
     private static StandardServiceRegistry registry;

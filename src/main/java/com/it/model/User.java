@@ -21,8 +21,7 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-    @OneToOne
-    @JoinColumn(name = "client_id")
+    @OneToOne(mappedBy = "user")
     private Client client;
 
     public Long getId() {

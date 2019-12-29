@@ -1,12 +1,10 @@
-package com.it.dto.response;
+package com.it.security.dto;
 
-public class TokenResponseDTO {
+public class SessionResponseDTO {
 
     private String accessToken;
 
     private String refreshToken;
-
-    private String tokenType;
 
     public String getAccessToken() {
         return accessToken;
@@ -22,13 +20,5 @@ public class TokenResponseDTO {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
     }
 }

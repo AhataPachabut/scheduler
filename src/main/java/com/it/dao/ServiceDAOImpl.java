@@ -1,7 +1,9 @@
 package com.it.dao;
 
 import com.it.model.Service;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ServiceDAOImpl extends GenericDAOImpl<Service, Long> implements ServiceDAO {
     private static ServiceDAOImpl instance;
 

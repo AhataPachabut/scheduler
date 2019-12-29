@@ -6,6 +6,8 @@ import com.it.model.User;
 import com.it.repository.RoleRepository;
 import com.it.repository.UserRepository;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private static final String SEMICOLON = ";";
+    private static final String EMPTY = "";
 
     @Autowired
     private UserRepository userRepository;
@@ -46,7 +52,7 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserRequestDto requestDto) {
+    public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserRequestDto requestDto){
         final User user = mapper.map(requestDto, User.class);
         user.setPassword(encoder.encode(requestDto.getPassword()));
         user.setRoles(requestDto.getRoles().stream()

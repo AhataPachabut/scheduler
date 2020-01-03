@@ -1,9 +1,9 @@
 package com.it.repository;
 
 import com.it.model.Role;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends GenericRepository<Role, Long> {
 
     Role findByName(String name);
+
 }

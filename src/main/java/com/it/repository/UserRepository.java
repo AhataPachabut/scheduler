@@ -1,9 +1,9 @@
 package com.it.repository;
 
 import com.it.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends GenericRepository<User, Long> {
 
     User findByName(String name);
+
 }

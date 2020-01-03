@@ -1,29 +1,21 @@
 package com.it.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 @Table(name = "SERVICES")
-public class Service implements Serializable {
+public class Service extends BaseClass {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(nullable = false)
+    @NotNull(message = "{service.name.notNull}")
+    @NotEmpty(message = "{service.name.notEmpty}")
     private String name;
 
     @OneToMany(mappedBy = "service")
     private Set<Event> events;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

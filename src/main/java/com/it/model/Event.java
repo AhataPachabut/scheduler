@@ -1,16 +1,11 @@
 package com.it.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "EVENTS")
-public class Event implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Event extends BaseClass {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
@@ -25,14 +20,6 @@ public class Event implements Serializable {
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "resource_id")})
     private Set<Resource> resources;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Service getService() {
         return service;

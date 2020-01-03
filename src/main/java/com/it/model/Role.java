@@ -1,27 +1,22 @@
 package com.it.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ROLES")
-public class Role {
+public class Role extends BaseClass{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(unique = true, nullable = false)
+    @NotNull(message = "{role.name.notNull}")
+    @NotEmpty(message = "{role.name.notEmpty}")
     private String name;
 
 //    @ManyToMany(mappedBy = "roles")
 //    private Set<User> users;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

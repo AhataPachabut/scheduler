@@ -1,17 +1,17 @@
 package com.it.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 @Table(name = "CLIENTS")
-public class Client implements Serializable {
+public class Client extends BaseClass {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(nullable = false)
+    @NotNull(message = "{client.name.notNull}")
+    @NotEmpty(message = "{client.name.notEmpty}")
     private String name;
 
     @OneToMany(mappedBy = "client")
@@ -20,14 +20,6 @@ public class Client implements Serializable {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

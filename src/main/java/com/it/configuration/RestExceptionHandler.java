@@ -50,4 +50,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
     }
+
+//    @ExceptionHandler(value = {Exception.class})
+//    protected ResponseEntity<Object> handleException(Exception exception, WebRequest request) {
+//        LOGGER.error(exception.getMessage(), exception);
+//        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+//        return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
+//    }
 }

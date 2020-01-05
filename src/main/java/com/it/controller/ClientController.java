@@ -4,12 +4,14 @@ import com.it.dto.request.ClientRequestDto;
 import com.it.dto.response.ClientResponseDto;
 import com.it.model.Client;
 import com.it.service.ClientService;
+import com.it.service.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientRepository;
+
+    @Autowired
+    private UserService userRepository;
 
     @Autowired
     private Mapper mapper;
@@ -51,8 +56,9 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientResponseDto> create(@RequestBody ClientRequestDto requestDto) throws Exception {
+    public ResponseEntity<ClientResponseDto> create(@Valid @RequestBody ClientRequestDto requestDto) throws Exception {
         final Client entity = mapper.map(requestDto, Client.class);
+        entity.setUser(userRepository.findById(requestDto.getUser()));
         clientRepository.save(entity);
 
         final ClientResponseDto responseDto = mapper.map(entity, ClientResponseDto.class);
@@ -60,8 +66,9 @@ public class ClientController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientResponseDto> update(@PathVariable Long id, @RequestBody ClientRequestDto requestDto) throws Exception {
+    public ResponseEntity<ClientResponseDto> update(@PathVariable Long id, @Valid @RequestBody ClientRequestDto requestDto) throws Exception {
         Client entity = clientRepository.findById(id);
+        entity.setUser(userRepository.findById(requestDto.getUser()));
         clientRepository.update(entity);
 
         final ClientResponseDto responseDto = mapper.map(entity, ClientResponseDto.class);

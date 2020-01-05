@@ -15,7 +15,7 @@ public class Event extends BaseClass {
     @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Event_Resource",
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "resource_id")})

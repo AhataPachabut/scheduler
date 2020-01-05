@@ -9,6 +9,7 @@ public class ClientRequestDto {
     @NotEmpty(message = "{client.name.notEmpty}")
     private String name;
 
+    @NotNull(message = "{client.user.notNull}")
     private Long user;
 
     public String getName() {

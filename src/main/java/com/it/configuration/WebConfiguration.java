@@ -1,5 +1,12 @@
 package com.it.configuration;
 
+import com.it.converter.*;
+import com.it.dto.request.ClientRequestDto;
+import com.it.dto.request.EventRequestDto;
+import com.it.dto.request.UserRequestDto;
+import com.it.model.Client;
+import com.it.model.Event;
+import com.it.model.User;
 import com.it.security.dto.SessionResponseDTO;
 import com.it.security.model.Session;
 import org.dozer.DozerBeanMapper;
@@ -15,35 +22,27 @@ public class WebConfiguration {
     @Bean
     public Mapper mapper() {
 
-         /*class EventRequestDtoConverter extends DozerConverter<EventRequestDto, Event>
-        {
-
-            public EventRequestDtoConverter(Class<EventRequestDto> prototypeA, Class<Event> prototypeB) {
-                super(prototypeA, prototypeB);
-            }
-
-            @Override
-            public Event convertTo(EventRequestDto eventRequestDto, Event event) {
-                return null;
-            }
-
-            @Override
-            public EventRequestDto convertFrom(Event event, EventRequestDto eventRequestDto) {
-                return null;
-            }
-        }*/
-
         final BeanMappingBuilder builder = new BeanMappingBuilder() {
             @Override
             protected void configure() {
-//                mapping(EventRequestDto.class, Event.class)
-//                        .fields("clientId", "client", FieldsMappingOptions.customConverter(EventRequestDtoConverter.class))
-//                        .fields("serviceId", "partitionKey", FieldsMappingOptions.copyByReference())
-//                        .fields("source_type", "sourceType", FieldsMappingOptions.copyByReference());
+
+                mapping(EventRequestDto.class, Event.class)
+                        .fields("client", "client", FieldsMappingOptions.customConverter(ClientConverter.class))
+                        .fields("service", "service", FieldsMappingOptions.customConverter(ServiceConverter.class))
+                        .fields("resources", "resources", FieldsMappingOptions.customConverter(ResourceConverter.class));
+
+                mapping(ClientRequestDto.class, Client.class)
+                        .fields("name", "name")
+                        .fields("user", "user", FieldsMappingOptions.customConverter(UserConverter.class));
+
+                mapping(UserRequestDto.class, User.class)
+                        .fields("name", "name")
+                        .fields("password", "password")
+                        .fields("roles", "roles", FieldsMappingOptions.customConverter(RoleConverter.class));
 
                 mapping(Session.class, SessionResponseDTO.class)
-                        .fields("accessToken.key", "accessToken", FieldsMappingOptions.copyByReference())
-                        .fields("refreshToken.key", "refreshToken", FieldsMappingOptions.copyByReference());
+                        .fields("accessToken.key", "accessToken")
+                        .fields("refreshToken.key", "refreshToken");
             }
         };
 
@@ -52,3 +51,4 @@ public class WebConfiguration {
         return dozerBeanMapper;
     }
 }
+

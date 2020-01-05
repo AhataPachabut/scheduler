@@ -27,14 +27,7 @@ import java.io.IOException;
 
     private static final String AUTHORIZATION = "Authorization";
 
-//    @Autowired
-//    private TokenService tokenService;
-//
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-
     private TokenService tokenService;
-
     private UserDetailsService userDetailsService;
 
     @Autowired

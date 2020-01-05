@@ -13,17 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-//crud+
-//dto+
-//mapper+-
-//db+
-//exceptions+-
-//validate+-
-//logger
-//spring security+-
 
 @RestController
 @RequestMapping("/events")
@@ -63,13 +55,13 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponseDto> create(@RequestBody EventRequestDto requestDto) throws Exception {
+    public ResponseEntity<EventResponseDto> create(@Valid @RequestBody EventRequestDto requestDto) throws Exception {
         final Event entity = mapper.map(requestDto, Event.class);
-        entity.setClient(clientRepository.findById(requestDto.getClient()));
-        entity.setService(serviceRepository.findById(requestDto.getService()));
-        entity.setResources(requestDto.getResources().stream()
-                .map((i) -> resourceRepository.findById(i))
-                .collect(Collectors.toSet()));
+//        entity.setClient(clientRepository.findById(requestDto.getClient()));
+//        entity.setService(serviceRepository.findById(requestDto.getService()));
+//        entity.setResources(requestDto.getResources().stream()
+//                .map((i) -> resourceRepository.findById(i))
+//                .collect(Collectors.toSet()));
         eventRepository.save(entity);
 
         final EventResponseDto responseDto = mapper.map(entity, EventResponseDto.class);
@@ -77,13 +69,13 @@ public class EventController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<EventResponseDto> update(@PathVariable Long id, @RequestBody EventRequestDto requestDto) throws Exception {
+    public ResponseEntity<EventResponseDto> update(@PathVariable Long id, @Valid @RequestBody EventRequestDto requestDto) throws Exception {
         Event entity = eventRepository.findById(id);
-        entity.setClient(clientRepository.findById(requestDto.getClient()));
-        entity.setService(serviceRepository.findById(requestDto.getService()));
-        entity.setResources(requestDto.getResources().stream()
-                .map((i) -> resourceRepository.findById(i))
-                .collect(Collectors.toSet()));
+//        entity.setClient(clientRepository.findById(requestDto.getClient()));
+//        entity.setService(serviceRepository.findById(requestDto.getService()));
+//        entity.setResources(requestDto.getResources().stream()
+//                .map((i) -> resourceRepository.findById(i))
+//                .collect(Collectors.toSet()));
         eventRepository.update(entity);
 
         final EventResponseDto responseDto = mapper.map(entity, EventResponseDto.class);

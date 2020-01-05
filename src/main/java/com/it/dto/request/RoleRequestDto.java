@@ -16,5 +16,4 @@ public class RoleRequestDto {
     public void setName(String name) {
         this.name = name;
     }
-
 }

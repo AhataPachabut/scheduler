@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/roles")
 public class RoleController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class RoleController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<RoleResponseDto> update(@PathVariable Long id, @RequestBody UserRequestDto requestDto) throws Exception {
+    public ResponseEntity<RoleResponseDto> update(@PathVariable Long id, @Valid @RequestBody UserRequestDto requestDto) throws Exception {
         Role entity = roleRepository.findById(id);
         roleRepository.update(entity);
 

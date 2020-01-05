@@ -18,7 +18,7 @@ public class User extends BaseClass{
     @NotEmpty(message = "{user.password.notEmpty}")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -43,9 +43,7 @@ public class User extends BaseClass{
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
+    public Set<Role> getRoles() { return roles; }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;

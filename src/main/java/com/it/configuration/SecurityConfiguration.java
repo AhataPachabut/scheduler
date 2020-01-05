@@ -1,16 +1,16 @@
 package com.it.configuration;
 
+import com.it.converter.ClientConverter;
 import com.it.security.filter.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.token.TokenService;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,10 +25,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private TokenService tokenService;
+    private TokenAuthenticationFilter tokenAuthenticationFilter;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private ClientConverter clientConverter;
 
     @Bean
     @Override
@@ -52,10 +52,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
+
                 .antMatchers("/auth/**").permitAll()
+
+                .antMatchers(HttpMethod.POST,"/users/**").permitAll()
+//                .antMatchers(HttpMethod.PUT,"/users/**").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE,"/users/**").hasRole("ADMIN")
+
+                .antMatchers("/events/**").authenticated()
+
+                .antMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+
                 .anyRequest().authenticated()
                 ;
 
-        http.addFilterBefore(new TokenAuthenticationFilter(tokenService, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

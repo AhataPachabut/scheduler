@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+//@Transactional
 public class UserController {
 
     @Autowired
@@ -64,7 +65,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @RequestBody UserRequestDto requestDto) throws Exception {
+    public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @Valid @RequestBody UserRequestDto requestDto) throws Exception {
         User entity = userRepository.findById(id);
         entity.setRoles(requestDto.getRoles().stream()
                 .map((i) -> roleRepository.findById(i))

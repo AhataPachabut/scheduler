@@ -24,7 +24,7 @@
     <dozer>5.5.1</dozer>
     <logback>1.2.3</logback>
     <jjwt>0.9.1</jjwt>
-    <hibernate.validator>6.0.16.Final</hibernate.validator>
+    <hibernate.validator>6.1.0.Final</hibernate.validator>
   </properties>
 
   <dependencies>

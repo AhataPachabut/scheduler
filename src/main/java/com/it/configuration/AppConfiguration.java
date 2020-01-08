@@ -1,5 +1,6 @@
 package com.it.configuration;
 
+import com.it.security.SecurityConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -10,8 +11,8 @@ import org.springframework.context.annotation.Import;
 //db+
 //exceptions+- not all
 //validate+- messages
-//logger-
-//spring security+- roles joinfetch role_admin
+//logger- //Controller - Exc - ControllerAdvice - Logger+ //security - filter - Exc - Logger+ //test it
+//spring security+- roles joinfetch //role_admin+ //
 
 @Configuration
 @ComponentScan(basePackages = "com.it")

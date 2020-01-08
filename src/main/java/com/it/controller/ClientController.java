@@ -15,15 +15,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//crud+
-//dto+
-//mapper+-
-//db+
-//exceptions+-
-//validate+-
-//logger
-//spring security+-
-
 @RestController
 @RequestMapping("/clients")
 public class ClientController {

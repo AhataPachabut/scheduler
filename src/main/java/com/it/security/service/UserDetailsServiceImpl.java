@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             //get entity User
             final User user = userRepository.findByName(username);
             final Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                    .map(role -> new SimpleGrantedAuthority(role.getName()))
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
                     .collect(Collectors.toSet());
 
             return new UserDetailsImpl(user.getName(), user.getPassword(), authorities);

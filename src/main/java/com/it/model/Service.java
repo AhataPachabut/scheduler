@@ -1,12 +1,18 @@
 package com.it.model;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 @Table(name = "SERVICES")
+@NoArgsConstructor
+@Data
 public class Service extends BaseClass {
 
     @Column(nullable = false)
@@ -14,18 +20,6 @@ public class Service extends BaseClass {
     @NotEmpty(message = "{service.name.notEmpty}")
     private String name;
 
-    @OneToMany(mappedBy = "service")
-    private Set<Event> events;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
+//    @OneToMany(mappedBy = "service")
+//    private Set<Event> events;
 }

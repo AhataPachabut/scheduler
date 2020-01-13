@@ -7,16 +7,18 @@ import org.springframework.context.annotation.Import;
 
 //crud+
 //dto+
-//mapper+- autowired service
+//mapper+
 //db+
-//exceptions+- not all
 //validate+- messages
-//logger- //Controller - Exc - ControllerAdvice - Logger+ //security - filter - Exc - Logger+ //test it
-//spring security+- roles joinfetch //role_admin+ //
+//exceptions+ //Controller - Exc - ControllerAdvice - Logger+ //security - conf - Exc - AccessDeniedHandler - Logger+ //security - conf - Exc - AuthEntryPoint - Logger+ //security - filter - Exc - Logger+
+//logger+
+//spring security+
 
 @Configuration
 @ComponentScan(basePackages = "com.it")
 @Import({WebConfiguration.class, DatabaseConfiguration.class, SecurityConfiguration.class, MessagesConfiguration.class})
+//logback.xml
+//ValidationMessages.properties
 public class AppConfiguration {
 
 }

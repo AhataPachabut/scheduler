@@ -8,6 +8,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,17 +17,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
+@Transactional
 public class RoleController {
 
     @Autowired
-    private RoleService roleRepository;
+    private RoleService roleService;
 
     @Autowired
     private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<RoleResponseDto>> readAll() {
-        final List<Role> entity = roleRepository.findAll();
+        final List<Role> entity = roleService.findAll();
 
         final List<RoleResponseDto> responseDto = entity.stream()
                 .map((i) -> mapper.map(i, RoleResponseDto.class))
@@ -36,7 +38,7 @@ public class RoleController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<RoleResponseDto> read(@PathVariable Long id) {
-        Role entity = roleRepository.findById(id);
+        Role entity = roleService.findById(id);
 
         final RoleResponseDto responseDto = mapper.map(entity, RoleResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -45,7 +47,7 @@ public class RoleController {
     @PostMapping
     public ResponseEntity<RoleResponseDto> create(@Valid @RequestBody UserRequestDto requestDto) throws Exception {
         final Role entity = mapper.map(requestDto, Role.class);
-        roleRepository.save(entity);
+        roleService.save(entity);
 
         final RoleResponseDto responseDto = mapper.map(entity, RoleResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -53,8 +55,8 @@ public class RoleController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<RoleResponseDto> update(@PathVariable Long id, @Valid @RequestBody UserRequestDto requestDto) throws Exception {
-        Role entity = roleRepository.findById(id);
-        roleRepository.update(entity);
+        Role entity = roleService.findById(id);
+        roleService.update(entity);
 
         final RoleResponseDto responseDto = mapper.map(entity, RoleResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -63,7 +65,7 @@ public class RoleController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
-        roleRepository.deleteById(id);
+        roleService.deleteById(id);
     }
 
 }

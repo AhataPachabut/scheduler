@@ -3,8 +3,6 @@ package com.it.security.service;
 import com.it.model.User;
 import com.it.security.model.UserDetailsImpl;
 import com.it.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,27 +18,18 @@ import java.util.stream.Collectors;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
-
     @Autowired
     private UserService userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        try {
+        //get entity User
+        final User user = userRepository.findByName(username);
+        final Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                .collect(Collectors.toSet());
 
-            //get entity User
-            final User user = userRepository.findByName(username);
-            final Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-                    .collect(Collectors.toSet());
-
-            return new UserDetailsImpl(user.getName(), user.getPassword(), authorities);
-
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            throw e;
-        }
+        return new UserDetailsImpl(user.getName(), user.getPassword(), authorities);
     }
 }

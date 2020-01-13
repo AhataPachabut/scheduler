@@ -9,6 +9,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,17 +18,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/equipments")
+@Transactional
 public class EquipmentController {
 
     @Autowired
-    private ResourceService resourceRepository;
+    private ResourceService resourceService;
 
     @Autowired
     private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<EquipmentResponseDto>> readAll() {
-        final List<Resource> entity = resourceRepository.findAllEquipment();
+        final List<Resource> entity = resourceService.findAllEquipment();
 
         final List<EquipmentResponseDto> responseDto = entity.stream()
                 .map((i) -> mapper.map(i, EquipmentResponseDto.class))
@@ -37,7 +39,7 @@ public class EquipmentController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<EquipmentResponseDto> read(@PathVariable Long id) {
-        Resource entity = resourceRepository.findById(id);
+        Resource entity = resourceService.findById(id);
 
         final EquipmentResponseDto responseDto = mapper.map(entity, EquipmentResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -46,7 +48,7 @@ public class EquipmentController {
     @PostMapping
     public ResponseEntity<EquipmentResponseDto> create(@Valid @RequestBody EquipmentRequestDto requestDto) throws Exception {
         final Resource entity = mapper.map(requestDto, Equipment.class);
-        resourceRepository.save(entity);
+        resourceService.save(entity);
 
         final EquipmentResponseDto responseDto = mapper.map(entity, EquipmentResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -54,8 +56,8 @@ public class EquipmentController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EquipmentResponseDto> update(@PathVariable Long id, @Valid @RequestBody EquipmentRequestDto requestDto) throws Exception {
-        Resource entity = resourceRepository.findById(id);
-        resourceRepository.update(entity);
+        Resource entity = resourceService.findById(id);
+        resourceService.update(entity);
 
         final EquipmentResponseDto responseDto = mapper.map(entity, EquipmentResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -64,7 +66,7 @@ public class EquipmentController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
-        resourceRepository.deleteById(id);
+        resourceService.deleteById(id);
     }
 }
 

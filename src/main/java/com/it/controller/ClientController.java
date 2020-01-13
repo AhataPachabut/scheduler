@@ -4,11 +4,11 @@ import com.it.dto.request.ClientRequestDto;
 import com.it.dto.response.ClientResponseDto;
 import com.it.model.Client;
 import com.it.service.ClientService;
-import com.it.service.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,20 +17,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/clients")
+@Transactional
 public class ClientController {
 
     @Autowired
-    private ClientService clientRepository;
-
-    @Autowired
-    private UserService userRepository;
+    private ClientService clientService;
 
     @Autowired
     private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<ClientResponseDto>> readAll() {
-        final List<Client> entity = clientRepository.findAll();
+        final List<Client> entity = clientService.findAll();
 
         final List<ClientResponseDto> responseDto = entity.stream()
                 .map((i) -> mapper.map(i, ClientResponseDto.class))
@@ -40,7 +38,7 @@ public class ClientController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClientResponseDto> read(@PathVariable Long id) {
-        Client entity = clientRepository.findById(id);
+        Client entity = clientService.findById(id);
 
         final ClientResponseDto responseDto = mapper.map(entity, ClientResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -49,8 +47,7 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<ClientResponseDto> create(@Valid @RequestBody ClientRequestDto requestDto) throws Exception {
         final Client entity = mapper.map(requestDto, Client.class);
-        entity.setUser(userRepository.findById(requestDto.getUser()));
-        clientRepository.save(entity);
+        clientService.save(entity);
 
         final ClientResponseDto responseDto = mapper.map(entity, ClientResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -58,9 +55,8 @@ public class ClientController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ClientResponseDto> update(@PathVariable Long id, @Valid @RequestBody ClientRequestDto requestDto) throws Exception {
-        Client entity = clientRepository.findById(id);
-        entity.setUser(userRepository.findById(requestDto.getUser()));
-        clientRepository.update(entity);
+        final Client entity = mapper.map(requestDto, Client.class);
+        clientService.update(entity);
 
         final ClientResponseDto responseDto = mapper.map(entity, ClientResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -69,7 +65,7 @@ public class ClientController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
-        clientRepository.deleteById(id);
+        clientService.deleteById(id);
     }
 }
 

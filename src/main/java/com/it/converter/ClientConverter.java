@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientConverter implements CustomConverter {
 
+    private static ClientService clientService;
+
     @Autowired
-    private ClientService clientRepository;
+    public ClientConverter(ClientService clientService) {
+        ClientConverter.clientService = clientService;
+    }
 
-//    @Autowired
-//    public ClientConverter(ClientService clientRepository){
-//        this.clientRepository = clientRepository;
-//    }
-
-    //public ClientConverter(){}
+    public ClientConverter() {
+    }
 
     @Override
     public Object convert(Object dest, Object source, Class<?> destinationClass, Class<?> sourceClass) {
@@ -25,7 +25,7 @@ public class ClientConverter implements CustomConverter {
             return null;
 
         else if(source instanceof Long) {
-            return clientRepository.findById((Long) source);
+            return clientService.findById((Long) source);
         }
 
         else return null;

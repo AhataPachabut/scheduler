@@ -8,6 +8,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,17 +17,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/services")
+@Transactional
 public class ServiceController {
 
     @Autowired
-    private ServiceService serviceRepository;
+    private ServiceService serviceService;
 
     @Autowired
     private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<ServiceResponseDto>> readAll() {
-        final List<Service> entity = serviceRepository.findAll();
+        final List<Service> entity = serviceService.findAll();
 
         final List<ServiceResponseDto> responseDto = entity.stream()
                 .map((i) -> mapper.map(i, ServiceResponseDto.class))
@@ -36,7 +38,7 @@ public class ServiceController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ServiceResponseDto> read(@PathVariable Long id) {
-        Service entity = serviceRepository.findById(id);
+        Service entity = serviceService.findById(id);
 
         final ServiceResponseDto responseDto = mapper.map(entity, ServiceResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -45,7 +47,7 @@ public class ServiceController {
     @PostMapping
     public ResponseEntity<ServiceResponseDto> create(@Valid @RequestBody ServiceRequestDto requestDto) throws Exception {
         final Service entity = mapper.map(requestDto, Service.class);
-        serviceRepository.save(entity);
+        serviceService.save(entity);
 
         final ServiceResponseDto responseDto = mapper.map(entity, ServiceResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -53,8 +55,8 @@ public class ServiceController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ServiceResponseDto> update(@PathVariable Long id, @Valid @RequestBody ServiceRequestDto requestDto) throws Exception {
-        Service entity = serviceRepository.findById(id);
-        serviceRepository.update(entity);
+        Service entity = serviceService.findById(id);
+        serviceService.update(entity);
 
         final ServiceResponseDto responseDto = mapper.map(entity, ServiceResponseDto.class);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -63,7 +65,7 @@ public class ServiceController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
-        serviceRepository.deleteById(id);
+        serviceService.deleteById(id);
     }
 }
 

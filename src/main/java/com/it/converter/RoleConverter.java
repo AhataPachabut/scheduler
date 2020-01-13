@@ -1,6 +1,5 @@
 package com.it.converter;
 
-import com.it.service.ClientService;
 import com.it.service.RoleService;
 import org.dozer.CustomConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,11 @@ import java.util.stream.Collectors;
 @Service
 public class RoleConverter implements CustomConverter {
 
-    private RoleService roleRepository;
+    private static RoleService roleService;
 
     @Autowired
-    public RoleConverter(ClientService clientRepository){
-        this.roleRepository = roleRepository;
+    public RoleConverter(RoleService roleService){
+        RoleConverter.roleService = roleService;
     }
 
     public RoleConverter(){}
@@ -29,7 +28,7 @@ public class RoleConverter implements CustomConverter {
 
         else if (source instanceof Set) {
             return ((Set)source).stream()
-                    .map((i) -> roleRepository.findById((Long) i))
+                    .map((i) -> roleService.findById((Long) i))
                     .collect(Collectors.toSet());
         }
 

@@ -1,9 +1,8 @@
 package com.it.security.service;
 
 import com.it.security.model.TokenImpl;
-import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.token.Token;
 import org.springframework.security.core.token.TokenService;
 import org.springframework.stereotype.Service;
@@ -12,8 +11,6 @@ import java.util.Date;
 
 @Service
 public class TokenServiceImpl implements TokenService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TokenServiceImpl.class);
 
     private static final String JWT_SECRET = "secret";
     private static final String BEARER = "Bearer ";
@@ -46,20 +43,13 @@ public class TokenServiceImpl implements TokenService {
 
         key = key.replace(BEARER, "");
 
-        try{
+        String username =
+                Jwts.parser()
+                        .setSigningKey(JWT_SECRET)
+                        .parseClaimsJws(key)
+                        .getBody()
+                        .getSubject();
 
-            String username =
-                    Jwts.parser()
-                            .setSigningKey(JWT_SECRET)
-                            .parseClaimsJws(key)
-                            .getBody()
-                            .getSubject();
-
-            return allocateToken(username);
-
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            throw e;
-        }
+        return allocateToken(username);
     }
 }

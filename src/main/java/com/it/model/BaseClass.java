@@ -1,13 +1,23 @@
 package com.it.model;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @MappedSuperclass
+@NoArgsConstructor
+@Getter
 public abstract class BaseClass implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
 
     public Long getId() {

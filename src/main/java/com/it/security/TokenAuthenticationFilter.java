@@ -34,15 +34,6 @@ import java.io.IOException;
     @Autowired
     private UserDetailsService userDetailsService;
 
-//    private TokenService tokenService;
-//    private UserDetailsService userDetailsService;
-//
-//    @Autowired
-//    public TokenAuthenticationFilter(TokenService tokenService, UserDetailsService userDetailsService) {
-//        this.tokenService = tokenService;
-//        this.userDetailsService = userDetailsService;
-//    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 

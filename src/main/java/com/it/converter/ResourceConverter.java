@@ -1,6 +1,5 @@
 package com.it.converter;
 
-import com.it.service.ClientService;
 import com.it.service.ResourceService;
 import org.dozer.CustomConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,11 @@ import java.util.stream.Collectors;
 @Service
 public class ResourceConverter implements CustomConverter {
 
-    private ResourceService resourceRepository;
+    private static ResourceService resourceService;
 
     @Autowired
-    public ResourceConverter(ClientService clientRepository){
-        this.resourceRepository = resourceRepository;
+    public ResourceConverter(ResourceService resourceService) {
+        ResourceConverter.resourceService = resourceService;
     }
 
     public ResourceConverter(){}
@@ -29,7 +28,7 @@ public class ResourceConverter implements CustomConverter {
 
         else if (source instanceof Set) {
             return ((Set)source).stream()
-                .map((i) -> resourceRepository.findById((Long) i))
+                .map((i) -> resourceService.findById((Long) i))
                 .collect(Collectors.toSet());
         }
 

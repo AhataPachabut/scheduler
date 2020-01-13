@@ -1,14 +1,20 @@
 package com.it.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "RESOURCES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@NoArgsConstructor
+@Data
 public abstract class Resource extends BaseClass {
 
     @Column(nullable = false)
@@ -16,15 +22,6 @@ public abstract class Resource extends BaseClass {
     @NotEmpty(message = "{resource.name.notEmpty}")
     private String name;
 
-    @ManyToMany(mappedBy = "resources")
-    private Set<Event> events;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+//    @ManyToMany(mappedBy = "resources")
+//    private Set<Event> events;
 }

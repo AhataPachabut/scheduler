@@ -1,6 +1,5 @@
 package com.it.converter;
 
-import com.it.service.ClientService;
 import com.it.service.ServiceService;
 import org.dozer.CustomConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceConverter implements CustomConverter {
 
-    private ServiceService serviceRepository;
+    private static ServiceService serviceService;
 
     @Autowired
-    public ServiceConverter(ClientService clientRepository){
-        this.serviceRepository = serviceRepository;
+    public ServiceConverter(ServiceService serviceService){
+        ServiceConverter.serviceService = serviceService;
     }
 
     public ServiceConverter(){}
@@ -25,7 +24,7 @@ public class ServiceConverter implements CustomConverter {
             return null;
 
         else if (source instanceof Long) {
-            return serviceRepository.findById((Long) source);
+            return serviceService.findById((Long) source);
         } else return null;
     }
 }

@@ -2,8 +2,7 @@ package com.it.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.dto.ErrorResponseDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,9 +23,9 @@ import java.io.IOException;
 
 //our filter. must be been. чтобы сработал @Autowired
 @Component
- public class TokenAuthenticationFilter extends OncePerRequestFilter {
+@Slf4j
+public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
     private static final String AUTHORIZATION = "Authorization";
 
     @Autowired
@@ -58,7 +57,7 @@ import java.io.IOException;
 
             String errorMessage = exception.getMessage();
 
-            LOGGER.error(errorMessage, exception);
+            log.error(errorMessage, exception);
 
             ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());

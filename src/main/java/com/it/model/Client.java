@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Client.
+ */
 @Entity
 @Table(name = "CLIENTS")
 @NoArgsConstructor

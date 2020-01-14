@@ -15,6 +15,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Service controller.
+ */
 @RestController
 @RequestMapping("/services")
 @Transactional
@@ -26,6 +29,11 @@ public class ServiceController {
     @Autowired
     private Mapper mapper;
 
+    /**
+     * Read all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping
     public ResponseEntity<List<ServiceResponseDto>> readAll() {
         final List<Service> entity = serviceService.findAll();
@@ -36,6 +44,12 @@ public class ServiceController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Read response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<ServiceResponseDto> read(@PathVariable Long id) {
         Service entity = serviceService.findById(id);
@@ -44,6 +58,13 @@ public class ServiceController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Create response entity.
+     *
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PostMapping
     public ResponseEntity<ServiceResponseDto> create(@Valid @RequestBody ServiceRequestDto requestDto) throws Exception {
         final Service entity = mapper.map(requestDto, Service.class);
@@ -53,6 +74,14 @@ public class ServiceController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id         the id
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ServiceResponseDto> update(@PathVariable Long id, @Valid @RequestBody ServiceRequestDto requestDto) throws Exception {
         Service entity = serviceService.findById(id);
@@ -62,6 +91,11 @@ public class ServiceController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

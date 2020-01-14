@@ -5,16 +5,27 @@ import org.dozer.CustomConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Service converter.
+ */
 @Service
 public class ServiceConverter implements CustomConverter {
 
     private static ServiceService serviceService;
 
+    /**
+     * Instantiates a new Service converter.
+     *
+     * @param serviceService the service service
+     */
     @Autowired
     public ServiceConverter(ServiceService serviceService){
         ServiceConverter.serviceService = serviceService;
     }
 
+    /**
+     * Instantiates a new Service converter.
+     */
     public ServiceConverter(){}
 
     @Override

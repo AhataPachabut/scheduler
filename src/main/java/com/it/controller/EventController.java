@@ -15,6 +15,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Event controller.
+ */
 @RestController
 @RequestMapping("/events")
 @Transactional
@@ -26,6 +29,11 @@ public class EventController {
     @Autowired
     private Mapper mapper;
 
+    /**
+     * Read all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping
     public ResponseEntity<List<EventResponseDto>> readAll() {
         final List<Event> entity = eventService.findAll();
@@ -36,6 +44,12 @@ public class EventController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Read response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<EventResponseDto> read(@PathVariable Long id) {
         Event entity = eventService.findById(id);
@@ -44,6 +58,13 @@ public class EventController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Create response entity.
+     *
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PostMapping
     public ResponseEntity<EventResponseDto> create(@Valid @RequestBody EventRequestDto requestDto) throws Exception {
         final Event entity = mapper.map(requestDto, Event.class);
@@ -53,6 +74,14 @@ public class EventController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id         the id
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventResponseDto> update(@PathVariable Long id, @Valid @RequestBody EventRequestDto requestDto) throws Exception {
         Event entity = eventService.findById(id);
@@ -62,6 +91,11 @@ public class EventController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

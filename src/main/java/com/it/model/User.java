@@ -8,6 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+/**
+ * The type User.
+ */
 @Entity
 @Table(name = "USERS")
 @NoArgsConstructor

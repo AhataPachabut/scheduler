@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Role.
+ */
 @Entity
 @Table(name = "ROLES")
 @NoArgsConstructor

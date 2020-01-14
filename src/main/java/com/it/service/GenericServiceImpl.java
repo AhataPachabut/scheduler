@@ -37,10 +37,12 @@ abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericServ
     }
 
     public void delete(T entity) {
+        repository.findById((U) entity.getId());
         repository.delete(entity);
     }
 
     public void deleteById(U id) {
+        repository.findById(id);
         repository.deleteById(id);
     }
 

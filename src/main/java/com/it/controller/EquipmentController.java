@@ -16,6 +16,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Equipment controller.
+ */
 @RestController
 @RequestMapping("/equipments")
 @Transactional
@@ -27,6 +30,11 @@ public class EquipmentController {
     @Autowired
     private Mapper mapper;
 
+    /**
+     * Read all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping
     public ResponseEntity<List<EquipmentResponseDto>> readAll() {
         final List<Resource> entity = resourceService.findAllEquipment();
@@ -37,6 +45,12 @@ public class EquipmentController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Read response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<EquipmentResponseDto> read(@PathVariable Long id) {
         Resource entity = resourceService.findById(id);
@@ -45,6 +59,13 @@ public class EquipmentController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Create response entity.
+     *
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PostMapping
     public ResponseEntity<EquipmentResponseDto> create(@Valid @RequestBody EquipmentRequestDto requestDto) throws Exception {
         final Resource entity = mapper.map(requestDto, Equipment.class);
@@ -54,6 +75,14 @@ public class EquipmentController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id         the id
+     * @param requestDto the request dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<EquipmentResponseDto> update(@PathVariable Long id, @Valid @RequestBody EquipmentRequestDto requestDto) throws Exception {
         Resource entity = resourceService.findById(id);
@@ -63,6 +92,11 @@ public class EquipmentController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

@@ -8,16 +8,27 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * The type Role converter.
+ */
 @Service
 public class RoleConverter implements CustomConverter {
 
     private static RoleService roleService;
 
+    /**
+     * Instantiates a new Role converter.
+     *
+     * @param roleService the role service
+     */
     @Autowired
     public RoleConverter(RoleService roleService){
         RoleConverter.roleService = roleService;
     }
 
+    /**
+     * Instantiates a new Role converter.
+     */
     public RoleConverter(){}
 
     @Override

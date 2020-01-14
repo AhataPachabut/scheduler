@@ -8,6 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Resource.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "RESOURCES")

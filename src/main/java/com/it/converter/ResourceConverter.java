@@ -8,16 +8,27 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * The type Resource converter.
+ */
 @Service
 public class ResourceConverter implements CustomConverter {
 
     private static ResourceService resourceService;
 
+    /**
+     * Instantiates a new Resource converter.
+     *
+     * @param resourceService the resource service
+     */
     @Autowired
     public ResourceConverter(ResourceService resourceService) {
         ResourceConverter.resourceService = resourceService;
     }
 
+    /**
+     * Instantiates a new Resource converter.
+     */
     public ResourceConverter(){}
 
    @Override

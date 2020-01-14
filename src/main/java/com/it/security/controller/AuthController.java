@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -37,7 +35,7 @@ public class AuthController {
     private Mapper mapper;
 
     @GetMapping("/signin")
-    public ResponseEntity<SessionResponseDTO> authenticateUser(@Valid @RequestParam(required=false,name="username") String username, @Valid @RequestParam(required=false,name="password") String password) {
+    public ResponseEntity<SessionResponseDTO> authenticateUser(@RequestParam(required=false,name="username") String username, @RequestParam(required=false,name="password") String password) {
 
         //set an authenticated user
         //либо лог+парль либо userdet+request т.к. в пер
@@ -55,7 +53,7 @@ public class AuthController {
     }
 
     @GetMapping("/refreshtoken")
-    public ResponseEntity<SessionResponseDTO> refreshToken(@Valid @RequestParam String tokenKey) {
+    public ResponseEntity<SessionResponseDTO> refreshToken(@RequestParam (required=false,name="token") String tokenKey) {
 
         Token token = tokenService.verifyToken(tokenKey);
         String username = token.getExtendedInformation();

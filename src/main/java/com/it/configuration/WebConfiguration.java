@@ -1,12 +1,8 @@
 package com.it.configuration;
 
 import com.it.converter.*;
-import com.it.dto.request.ClientRequestDto;
-import com.it.dto.request.EventRequestDto;
-import com.it.dto.request.UserRequestDto;
-import com.it.model.Client;
-import com.it.model.Event;
-import com.it.model.User;
+import com.it.dto.request.*;
+import com.it.model.*;
 import com.it.security.dto.SessionResponseDTO;
 import com.it.security.model.Session;
 import org.dozer.DozerBeanMapper;

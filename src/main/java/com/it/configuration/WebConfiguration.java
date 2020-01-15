@@ -1,6 +1,6 @@
 package com.it.configuration;
 
-import com.it.converter.*;
+import com.it.service.converter.*;
 import com.it.dto.request.*;
 import com.it.model.*;
 import com.it.dto.SessionResponseDTO;

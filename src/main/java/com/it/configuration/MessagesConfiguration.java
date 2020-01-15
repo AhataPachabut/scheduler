@@ -8,16 +8,18 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 //for exceptions.
 public class MessagesConfiguration {
 
+    //Accept-Language: de-DE
+
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("/Messages");
+        messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
 
     @Bean
-    public LocalValidatorFactoryBean validatorFactory() {
+    public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;

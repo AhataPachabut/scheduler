@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = "com.it")
 @Import({WebConfiguration.class, DatabaseConfiguration.class, SecurityConfiguration.class, MessagesConfiguration.class})
 //logback.xml
-//ValidationMessages.properties
 public class AppConfiguration {
 
 }

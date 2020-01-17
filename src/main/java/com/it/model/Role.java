@@ -2,6 +2,7 @@ package com.it.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +17,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "ROLES")
 @NoArgsConstructor
 @Data
-public class Role extends BaseClass{
+public class Role extends BaseClass implements GrantedAuthority {
 
     @Column(unique = true, nullable = false)
     @NotNull(message = "{role.name.notNull}")
     @NotEmpty(message = "{role.name.notEmpty}")
     private String name;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users;
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + name;
+    }
 }

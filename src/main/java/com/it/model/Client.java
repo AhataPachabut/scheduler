@@ -21,9 +21,6 @@ public class Client extends BaseClass {
     @NotEmpty(message = "{client.name.notEmpty}")
     private String name;
 
-//    @OneToMany(mappedBy = "client")
-//    private Set<Event> events;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

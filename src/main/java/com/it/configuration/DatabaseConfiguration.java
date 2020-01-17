@@ -17,6 +17,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * The type Database configuration.
+ */
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {
@@ -27,6 +30,11 @@ public class DatabaseConfiguration {
     @Autowired
     private Environment env;
 
+    /**
+     * Data source data source.
+     *
+     * @return the data source
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -37,6 +45,11 @@ public class DatabaseConfiguration {
         return dataSource;
     }
 
+    /**
+     * Entity manager factory local container entity manager factory bean.
+     *
+     * @return the local container entity manager factory bean
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -48,6 +61,12 @@ public class DatabaseConfiguration {
         return localContainerEntityManagerFactoryBean;
     }
 
+    /**
+     * Transaction manager platform transaction manager.
+     *
+     * @param emf the emf
+     * @return the platform transaction manager
+     */
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

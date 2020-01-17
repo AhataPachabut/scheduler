@@ -22,9 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Token authentication filter.
+ * own filter
  */
-//our filter
 @Component
 @Slf4j
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
@@ -71,7 +70,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    //we get string. it's encrypted by MD5 JSON with username and
+    //we get string. it's encrypted by MD5 JSON with username
     private String getToken(HttpServletRequest request) {
         return request.getHeader(AUTHORIZATION);
     }

@@ -22,7 +22,4 @@ public class Service extends BaseClass {
     @NotNull(message = "{service.name.notNull}")
     @NotEmpty(message = "{service.name.notEmpty}")
     private String name;
-
-//    @OneToMany(mappedBy = "service")
-//    private Set<Event> events;
 }

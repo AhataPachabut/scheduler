@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Authentication entry point.
+ * handle exc when no authentication
  */
 @Component
 @Slf4j
@@ -26,8 +26,6 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         String errorMessage = e.getMessage();
 
         log.error(errorMessage, e);
-
-        //response.getWriter().print("You need to login first in order to perform this action.");
 
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());

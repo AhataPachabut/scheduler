@@ -1,6 +1,6 @@
 package com.it.configuration;
 
-import com.it.service.converter.*;
+import com.it.converter.*;
 import com.it.dto.request.*;
 import com.it.model.*;
 import com.it.dto.SessionResponseDTO;
@@ -12,9 +12,17 @@ import org.dozer.loader.api.FieldsMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/**
+ * The type Web configuration.
+ */
 @EnableWebMvc
 public class WebConfiguration {
 
+    /**
+     * Mapper mapper.
+     *
+     * @return the mapper
+     */
     @Bean
     public Mapper mapper() {
 

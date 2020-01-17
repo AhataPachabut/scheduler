@@ -1,6 +1,6 @@
 package com.it.model;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.GeneratedValue;
@@ -14,29 +14,10 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 @NoArgsConstructor
-@Getter
+@Data
 public abstract class BaseClass implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

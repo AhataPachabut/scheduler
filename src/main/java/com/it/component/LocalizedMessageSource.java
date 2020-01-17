@@ -9,6 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * The type Localized message source.
+ */
+//Accept-Language: de-DE
 @Component
 public class LocalizedMessageSource {
 
@@ -17,6 +21,13 @@ public class LocalizedMessageSource {
     @Autowired
     private MessageSource messageSource;
 
+    /**
+     * Gets message.
+     *
+     * @param messageCode the message code
+     * @param arguments   the arguments
+     * @return the message
+     */
     public String getMessage(String messageCode, Object[] arguments) {
         Locale locale = LocaleContextHolder.getLocale();
         locale = localeList.contains(locale) ? locale : Locale.getDefault();

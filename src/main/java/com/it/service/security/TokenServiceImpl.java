@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
- * The type Token service.
+ * for token authentication
  */
 @Service
 public class TokenServiceImpl implements TokenService {
@@ -28,7 +28,7 @@ public class TokenServiceImpl implements TokenService {
                 Jwts.builder()
                         .setSubject(username)
                         .setIssuedAt(new Date())
-                        //.setExpiration(new Date(System.currentTimeMillis() + JWT_ACCESS_EXPIRATION_MILLIS))
+                        .setExpiration(new Date(System.currentTimeMillis() + JWT_ACCESS_EXPIRATION_MILLIS))
                         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
                         .compact();
 

@@ -2,10 +2,13 @@ package com.it.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -15,7 +18,7 @@ import java.util.Set;
 @Table(name = "USERS")
 @NoArgsConstructor
 @Data
-public class User extends BaseClass{
+public class User extends BaseClass implements UserDetails {
 
     @Column(unique = true, nullable = false)
     @NotNull(message = "{user.name.notNull}")
@@ -32,6 +35,38 @@ public class User extends BaseClass{
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-//    @OneToOne(mappedBy = "user")
-//    private Client client;
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

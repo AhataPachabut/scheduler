@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Access denied handler.
+ * handle exc when no rights
  */
 @Component
 @Slf4j
@@ -26,8 +26,6 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
         String errorMessage = e.getMessage();
 
         log.error(errorMessage, e);
-
-        //response.getWriter().print("You don't have required role to perform this action.");
 
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());

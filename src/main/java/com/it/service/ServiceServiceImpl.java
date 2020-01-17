@@ -5,6 +5,9 @@ import com.it.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The type Service service.
+ */
 @org.springframework.stereotype.Service
 @Transactional
 public class ServiceServiceImpl extends GenericServiceImpl<Service, Long> implements ServiceService {

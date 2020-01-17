@@ -14,7 +14,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.validation.ConstraintViolationException;
 
-//catch exceptions from all @RestController
+/**
+ * catch exceptions from all @RestController
+ */
 @ControllerAdvice(annotations = RestController.class)
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -33,6 +35,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(errorResponseDTO, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handle constraint violation exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(value = {ConstraintViolationException.class})
     protected ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception, WebRequest request) {
         String errorMessage = exception.getConstraintViolations().stream()
@@ -43,17 +52,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
     }
 
+    /**
+     * Handle runtime exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, WebRequest request) {
         log.error(exception.getMessage(), exception);
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
     }
-
-//    @ExceptionHandler(value = {Exception.class})
-//    protected ResponseEntity<Object> handleException(Exception exception, WebRequest request) {
-//        log.error(exception.getMessage(), exception);
-//        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-//        return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
-//    }
 }

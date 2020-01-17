@@ -21,6 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //UI + access token - TokenFilter - (auth by Token) - LoginPassFilter - Controller - return dto
 //UI + refresh token - TokenFilter - AuthController - /auth/refreshtoken - return new access+refresh token
 
+/**
+ * The type Security configuration.
+ */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -38,6 +41,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Password encoder password encoder.
+     *
+     * @return the password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -57,11 +65,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
+                //.antMatchers("/api/swagger-ui.html**", "/api/webjars/**").permitAll()
+
                 .antMatchers("/auth/**").permitAll()
 
                 .antMatchers(HttpMethod.POST,"/users/**").permitAll()
-//                .antMatchers(HttpMethod.PUT,"/users/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE,"/users/**").hasRole("ADMIN")
 
                 .antMatchers("/events/**").authenticated()
 

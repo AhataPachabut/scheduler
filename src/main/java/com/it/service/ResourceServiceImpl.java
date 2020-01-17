@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type Resource service.
+ */
 @Service
 @Transactional
 public class ResourceServiceImpl extends GenericServiceImpl<Resource, Long> implements ResourceService {

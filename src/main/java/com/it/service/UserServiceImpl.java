@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
+/**
+ * The type User service.
+ */
 @Service
 @Transactional
 public class UserServiceImpl extends GenericServiceImpl<User, Long> implements UserService {

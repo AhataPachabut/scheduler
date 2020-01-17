@@ -1,4 +1,4 @@
-package com.it.service.converter;
+package com.it.converter;
 
 import com.it.service.ServiceService;
 import org.dozer.CustomConverter;

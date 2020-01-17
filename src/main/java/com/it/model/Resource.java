@@ -24,7 +24,4 @@ public abstract class Resource extends BaseClass {
     @NotNull(message = "{resource.name.notNull}")
     @NotEmpty(message = "{resource.name.notEmpty}")
     private String name;
-
-//    @ManyToMany(mappedBy = "resources")
-//    private Set<Event> events;
 }

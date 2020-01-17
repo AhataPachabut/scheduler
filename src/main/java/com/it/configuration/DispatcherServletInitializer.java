@@ -5,6 +5,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import javax.servlet.Filter;
 
+/**
+ * The type Dispatcher servlet initializer.
+ */
 //like main
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

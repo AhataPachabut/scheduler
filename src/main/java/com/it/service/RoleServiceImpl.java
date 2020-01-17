@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
+/**
+ * The type Role service.
+ */
 @Service
 @Transactional
 public class RoleServiceImpl extends GenericServiceImpl<Role, Long> implements RoleService {

@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type Generic service.
+ *
+ * @param <T> the type parameter
+ * @param <U> the type parameter
+ */
 @Service
 @Transactional
 abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericService<T, U> {
@@ -46,6 +52,12 @@ abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericServ
         repository.deleteById(id);
     }
 
+    /**
+     * Validate.
+     *
+     * @param expression   the expression
+     * @param errorMessage the error message
+     */
     protected void validate(boolean expression, String errorMessage) {
         if (expression) {
             throw new RuntimeException(errorMessage);

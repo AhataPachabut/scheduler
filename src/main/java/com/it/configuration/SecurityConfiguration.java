@@ -64,19 +64,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-
-                //.antMatchers("/api/swagger-ui.html**", "/api/webjars/**").permitAll()
-
+                .antMatchers("/api/v2/api-docs","/v2/api-docs","/api/swagger-resources/**", "/swagger-resources/**", "/api/swagger-ui.html**", "/api/webjars/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
-
                 .antMatchers(HttpMethod.POST,"/users/**").permitAll()
-
                 .antMatchers("/events/**").authenticated()
-
                 .antMatchers(HttpMethod.POST).hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-
                 .anyRequest().authenticated()
 
                 //check roles
@@ -93,3 +87,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
+

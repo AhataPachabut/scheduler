@@ -1,8 +1,10 @@
 package com.it.component.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.it.component.LocalizedMessageSource;
 import com.it.dto.ErrorResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -19,6 +21,9 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
+
+    @Autowired
+    private LocalizedMessageSource localizedMessageSource;
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {

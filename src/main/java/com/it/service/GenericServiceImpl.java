@@ -1,5 +1,6 @@
 package com.it.service;
 
+import com.it.component.Validator;
 import com.it.model.BaseClass;
 import com.it.repository.GenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericServ
     @Autowired
     private GenericRepository<T, U> repository;
 
+    @Autowired
+    private Validator validator;
+
     public List<T> findAll() {
         return repository.findAll();
     }
@@ -30,14 +34,14 @@ abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericServ
     }
 
     public T save(T entity) {
-        validate(entity.getId() != null, "id.Null");
+        validator.validate(entity.getId() != null, "id.Null");
 
         return repository.save(entity);
     }
 
     public T update(T entity) {
-        validate(entity.getId() == null, "id.notNull");
-        validate(repository.findById((U) entity.getId()) == null,"id.notExist");
+        validator.validate(entity.getId() == null, "id.notNull");
+        validator.validate(repository.findById((U) entity.getId()) == null,"id.notExist");
 
         return repository.save(entity);
     }
@@ -50,17 +54,5 @@ abstract class GenericServiceImpl<T extends BaseClass, U> implements GenericServ
     public void deleteById(U id) {
         repository.findById(id);
         repository.deleteById(id);
-    }
-
-    /**
-     * Validate.
-     *
-     * @param expression   the expression
-     * @param errorMessage the error message
-     */
-    protected void validate(boolean expression, String errorMessage) {
-        if (expression) {
-            throw new RuntimeException(errorMessage);
-        }
     }
 }

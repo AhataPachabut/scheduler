@@ -26,6 +26,6 @@ public class Role extends BaseClass implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return "ROLE_" + name;
+        return "ROLE_" + name.toUpperCase();
     }
 }

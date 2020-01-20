@@ -1,6 +1,7 @@
 package com.it.component.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.it.component.LocalizedMessageSource;
 import com.it.dto.ErrorResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private TokenService tokenService;
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private LocalizedMessageSource localizedMessageSource;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

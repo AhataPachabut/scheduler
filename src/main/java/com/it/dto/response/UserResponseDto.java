@@ -1,6 +1,5 @@
 package com.it.dto.response;
 
-import com.it.dto.request.ClientRequestDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,5 +18,4 @@ public class UserResponseDto {
 
     private Set<RoleResponseDto> roles;
 
-    private ClientRequestDto client;
 }

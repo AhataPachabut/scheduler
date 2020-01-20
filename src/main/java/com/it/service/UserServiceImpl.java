@@ -1,5 +1,7 @@
 package com.it.service;
 
+import com.it.component.LocalizedMessageSource;
+import com.it.component.Validator;
 import com.it.model.User;
 import com.it.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private Validator validator;
+
+    @Autowired
+    private LocalizedMessageSource localizedMessageSource;
+
     @Override
     public User findByName(String name) {
         return repository.findByName(name);
@@ -25,18 +33,18 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
 
     @Override
     public User save(User entity) {
-        validate(entity.getId() != null, "id.Null");
-        validate(repository.findByName(entity.getName()) != null,"name.notUnique");
+        validator.validate(entity.getId() != null, localizedMessageSource.getMessage("user.id.Null", new Object[]{}));
+        validator.validate(repository.findByName(entity.getName()) != null,localizedMessageSource.getMessage("user.name.NotUnique", new Object[]{}));
 
         return repository.save(entity);
     }
 
     @Override
     public User update(User entity) {
-        validate(entity.getId() == null, "id.notNull");
-        validate(repository.findById(entity.getId()) == null,"id.notExist");
+        validator.validate(entity.getId() == null, localizedMessageSource.getMessage("user.id.NotNull", new Object[]{}));
+        validator.validate(repository.findById(entity.getId()) == null,localizedMessageSource.getMessage("user.id.NotExist", new Object[]{}));
         final User duplicateEntity = repository.findByName(entity.getName());
-        validate(duplicateEntity != null && !Objects.equals(duplicateEntity.getId(), entity.getId()),"name.notUnique");
+        validator.validate(duplicateEntity != null && !Objects.equals(duplicateEntity.getId(), entity.getId()), localizedMessageSource.getMessage("user.name.NotUnique", new Object[]{}));
 
         return repository.save(entity);
     }

@@ -2,6 +2,7 @@ package com.it.component;
 
 import com.it.dto.ErrorResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String SEMICOLON = ";";
     private static final String EMPTY = "";
+
+    @Autowired
+    private LocalizedMessageSource localizedMessageSource;
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,

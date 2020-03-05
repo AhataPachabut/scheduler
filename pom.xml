@@ -19,7 +19,7 @@
     <org.spring.core>5.1.5.RELEASE</org.spring.core>
     <org.spring.data>2.1.8.RELEASE</org.spring.data>
     <javax.servlet>4.0.1</javax.servlet>
-    <jackson.core>2.9.9</jackson.core>
+    <jackson.core>2.10.3</jackson.core>
     <dozer>5.5.1</dozer>
     <logback>1.2.3</logback>
     <jjwt>0.9.1</jjwt>

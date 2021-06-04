@@ -23,7 +23,7 @@
     <dozer>5.5.1</dozer>
     <logback>1.2.3</logback>
     <jjwt>0.9.1</jjwt>
-    <hibernate.validator>6.0.16.Final</hibernate.validator>
+    <hibernate.validator>6.0.20.Final</hibernate.validator>
     <lombok>1.18.6</lombok>
     <swagger>2.9.2</swagger>
   </properties>
